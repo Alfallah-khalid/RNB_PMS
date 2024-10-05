@@ -31,7 +31,8 @@ google = oauth.register(
 def home():
     # Check if user is logged in by checking session
     user = dict(session).get('profile', None)
-    return render_template('index.html', user=user)
+    return "hello"
+    #return render_template('index.html', user=user)
 
 @app.route('/login')
 def login():
