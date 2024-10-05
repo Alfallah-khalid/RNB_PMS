@@ -10,8 +10,28 @@ from flask_talisman import Talisman
 # Load environment variables from .env file
 load_dotenv()
 
+
+# Content Security Policy (CSP) to allow external styles and fonts
+csp = {
+    'default-src': '\'self\'',
+    'style-src': [
+        '\'self\'', 
+        'https://cdnjs.cloudflare.com',  # Allow Materialize CSS
+        'https://fonts.googleapis.com'   # Allow Google Fonts
+    ],
+    'font-src': [
+        'https://fonts.gstatic.com',     # Allow Google Fonts
+        'https://cdnjs.cloudflare.com'   # Allow Material Icons
+    ],
+    'script-src': [
+        '\'self\'', 
+        'https://cdnjs.cloudflare.com'   # Allow Materialize JS
+    ]
+}
+
+
 app = Flask(__name__)
-Talisman(app)
+Talisman(app, content_security_policy=csp)
 app.secret_key = os.getenv("SECRET_KEY")
 
 # Initialize OAuth
