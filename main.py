@@ -27,7 +27,14 @@ google = oauth.register(
     },
 )
 
+
+
 @app.route('/')
+def home2():
+    client_id = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
+    client_secret = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
+    return f"Client ID: {client_id}, Client Secret: {client_secret}"
+
 def home():
     # Check if user is logged in by checking session
     user = dict(session).get('profile', None)
