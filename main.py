@@ -35,6 +35,7 @@ app = Flask(__name__)
 SSLify =SSLify(app)
 #Talisman(app, content_security_policy=csp)
 app.secret_key = os.getenv("SECRET_KEY")
+app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 # Initialize OAuth
 oauth = OAuth(app)
