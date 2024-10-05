@@ -65,6 +65,7 @@ def login():
     
     # Redirect to Google's OAuth 2.0 server for authentication
     redirect_uri = url_for('authorize', _external=True)
+    app.logger.info(f"Redirect URI: {redirect_uri}")  # Log the redirect URI
     return google.authorize_redirect(redirect_uri, nonce=nonce)  # Pass the nonce
 
 @app.route('/login/callback')
