@@ -5,11 +5,13 @@ import os
 from dotenv import load_dotenv
 from authlib.jose import jwt
 import secrets
+from flask_talisman import Talisman
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
+Talisman(app)
 app.secret_key = os.getenv("SECRET_KEY")
 
 # Initialize OAuth

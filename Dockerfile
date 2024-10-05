@@ -13,5 +13,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expose the port that Cloud Run will use
 EXPOSE 8080
 
-# Start Flask app directly for debugging
-CMD ["python", "main.py"]
+# Start the Flask app using gunicorn with increased timeout
+CMD exec gunicorn --bind :$PORT --timeout 120 main:app
