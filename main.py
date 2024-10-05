@@ -33,7 +33,7 @@ csp = {
 
 app = Flask(__name__)
 SSLify =SSLify(app)
-#Talisman(app, content_security_policy=csp)
+Talisman(app, content_security_policy=csp)
 app.secret_key = os.getenv("SECRET_KEY")
 app.config['PREFERRED_URL_SCHEME'] = 'https'
 
@@ -50,7 +50,7 @@ google = oauth.register(
     },
     redirect_uri="https://rbck.mashwar.in/login/callback"  # Must match with Google Cloud Console
 )
-redirect_uri="https://rbck.mashwar.in/login/callback"  # Must match with Google Cloud Console
+#redirect_uri="https://rbck.mashwar.in/login/callback"  # Must match with Google Cloud Console
 @app.route('/')
 def home():
     # Check if user is logged in by checking session
@@ -60,13 +60,13 @@ def home():
 
 @app.route('/login')
 def login():
-    # Generate a secure nonce
+    # Generate a secure noncea
     nonce = secrets.token_urlsafe(16)
     session['nonce'] = nonce  # Store it in session
     
     # Redirect to Google's OAuth 2.0 server for authentication
     redirect_uri = url_for('authorize', _external=True)
-    redirect_uri="https://rbck.mashwar.in/login/callback" 
+    #redirect_uri="https://rbck.mashwar.in/login/callback" 
     app.logger.info(f"Redirect URI: {redirect_uri}")  # Log the redirect URI
     return google.authorize_redirect(redirect_uri, nonce=nonce)  # Pass the nonce
 
