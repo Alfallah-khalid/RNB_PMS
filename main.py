@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from authlib.jose import jwt
 import secrets
 from flask_talisman import Talisman
+from flask_sslify import SSLify
 
 # Load environment variables from .env file
 load_dotenv()
@@ -31,7 +32,8 @@ csp = {
 
 
 app = Flask(__name__)
-Talisman(app, content_security_policy=csp)
+SSLify =SSLify(app)
+#Talisman(app, content_security_policy=csp)
 app.secret_key = os.getenv("SECRET_KEY")
 
 # Initialize OAuth
