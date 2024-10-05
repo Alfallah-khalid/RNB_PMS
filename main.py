@@ -3,6 +3,8 @@ from flask import render_template
 from authlib.integrations.flask_client import OAuth
 import os
 from dotenv import load_dotenv
+from authlib.jose import jwt
+import secrets
 
 # Load environment variables from .env file
 load_dotenv()
@@ -16,37 +18,45 @@ google = oauth.register(
     name='google',
     client_id=os.getenv("GOOGLE_CLIENT_ID"),
     client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
-    access_token_url='https://oauth2.googleapis.com/token',
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
-    authorize_params=None,
-    access_token_params=None,
-    redirect_uri=os.getenv("REDIRECT_URI", default="http://localhost:8080/login/callback"),
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',  # Use Google's OpenID config URL
     client_kwargs={
-        'scope': 'openid email profile',  # Minimal scope to authenticate users and get user profile
-        'prompt': 'select_account'  # Ensures user selects account when logging in
-    },
+        'scope': 'openid email profile',
+        'prompt': 'select_account'
+    }
 )
 
 @app.route('/')
 def home():
     # Check if user is logged in by checking session
     user = dict(session).get('profile', None)
-    return "hello"
-    #return render_template('index.html', user=user)
+    #return "hello"
+    return render_template('index.html', user=user)
 
 @app.route('/login')
 def login():
+    # Generate a secure nonce
+    nonce = secrets.token_urlsafe(16)
+    session['nonce'] = nonce  # Store it in session
+    
     # Redirect to Google's OAuth 2.0 server for authentication
     redirect_uri = url_for('authorize', _external=True)
-    return google.authorize_redirect(redirect_uri)
+    return google.authorize_redirect(redirect_uri, nonce=nonce)  # Pass the nonce
 
 @app.route('/login/callback')
 def authorize():
     # Get the authorization token and user info from Google
     token = google.authorize_access_token()  # Exchanges the authorization code for token
-    user_info = google.parse_id_token(token)  # Parse ID Token for authentication
-    session['profile'] = user_info  # Store user profile information in the session
+    
+    # Retrieve the stored nonce from the session
+    nonce = session.get('nonce')
+    
+    # Parse ID Token for authentication and validate the nonce
+    user_info = google.parse_id_token(token, nonce=nonce)
+    
+    # Store user profile information in the session
+    session['profile'] = user_info
     session['token'] = token
+    
     return redirect('/')
 
 @app.route('/logout')

@@ -1,0 +1,48 @@
+
+
+/* Make the body fill the entire height of the page */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Main content should take up the available space and center its content */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    text-align: center;
+}
+
+/* Footer stays at the bottom */
+footer {
+    padding: 10px 0;
+    text-align: center;
+    background-color: #f5f5f5;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+/* Center the container and give it some margin from the top */
+.container {
+    margin-top: 50px;
+}
+
+/* Welcome text styling */
+.welcome-text {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Styling for login and logout buttons */
+.login-btn, .logout-btn {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+

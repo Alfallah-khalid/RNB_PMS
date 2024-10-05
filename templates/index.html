@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flask App</title>
+    
+    <!-- Import Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts for Typography -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Link to your custom external CSS file -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 </head>
+
 <body>
-    {% if user %}
-        <h1>Welcome, {{ user['name'] }}!</h1>
-        <p>Email: {{ user['email'] }}</p>
-        <a href="{{ url_for('logout') }}">Logout</a>
-    {% else %}
-        <h1>Hello, RNB CENTRAL v2</h1>
-        <a href="{{ url_for('login') }}">Login with Google</a>
-    {% endif %}
+
+    <nav>
+        <div class="nav-wrapper teal">
+            <a href="#" class="brand-logo center">PWD R&B Project Reporting and Monitoring System</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            {% if user %}
+                <h4>Welcome, {{ user['name'] }}!</h4>
+                <p>Email: {{ user['email'] }}</p>
+                <a href="{{ url_for('logout') }}" class="btn-large waves-effect waves-light red">Logout</a>
+            {% else %}
+                <h4>You Have not Logged in...</h4>
+                <a href="{{ url_for('login') }}" class="btn-large waves-effect waves-light teal">Login with Google</a>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 RNB CENTRAL v2. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Import Materialize JavaScript and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
+
 </html>
