@@ -50,7 +50,7 @@ google = oauth.register(
     },
     redirect_uri="https://rbck.mashwar.in/login/callback"  # Must match with Google Cloud Console
 )
-
+redirect_uri="https://rbck.mashwar.in/login/callback"  # Must match with Google Cloud Console
 @app.route('/')
 def home():
     # Check if user is logged in by checking session
