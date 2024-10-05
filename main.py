@@ -39,7 +39,7 @@ app.config['PREFERRED_URL_SCHEME'] = 'https'
 # Apply ProxyFix to trust the X-Forwarded-Proto header (Cloud Run uses this header)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
-# Initialize OAuth
+# Initialize OAuth (without the redirect_uri here)
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
@@ -49,8 +49,7 @@ google = oauth.register(
     client_kwargs={
         'scope': 'openid email profile',
         'prompt': 'select_account'
-    },
-    redirect_uri=url_for('authorize', _external=True)  # Dynamically generated HTTPS URL
+    }
 )
 
 @app.route('/')
@@ -65,7 +64,7 @@ def login():
     nonce = secrets.token_urlsafe(16)
     session['nonce'] = nonce  # Store it in session
     
-    # Redirect to Google's OAuth 2.0 server for authentication
+    # Now generate the redirect URI inside a valid application context
     redirect_uri = url_for('authorize', _external=True)
     app.logger.info(f"Redirect URI: {redirect_uri}")  # Log the redirect URI
     return google.authorize_redirect(redirect_uri, nonce=nonce)  # Pass the nonce
