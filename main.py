@@ -22,7 +22,8 @@ google = oauth.register(
     client_kwargs={
         'scope': 'openid email profile',
         'prompt': 'select_account'
-    }
+    },
+    redirect_uri="https://rbck.mashwar.in/login/callback"  # Must match with Google Cloud Console
 )
 
 @app.route('/')
