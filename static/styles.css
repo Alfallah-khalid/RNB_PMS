@@ -46,3 +46,30 @@ footer {
     text-align: center;
 }
 
+
+/* Ensure the logo text is fully visible and centered */
+.brand-logo {
+    display: flex;           /* Use flexbox to center the text */
+    align-items: center;     /* Vertically center the text */
+    justify-content: center; /* Horizontally center the text */
+    width: auto;             /* Allow the logo to take up its natural width */
+    white-space: nowrap;     /* Prevent text from wrapping */
+    overflow: visible;       /* Ensure text overflow is visible */
+}
+
+.nav-wrapper {
+    overflow: visible;       /* Ensure no overflow hiding in the navbar */
+}
+
+/* Optional: Add some padding to ensure the text isn't too close to the edges */
+.brand-logo.center {
+    padding: 0 20px;
+}
+.logoutDiv {
+    position: relative;
+    top: 0;
+    right: 0;
+    padding: 10px;  /* Optional padding */
+
+    border-radius: 5px; /* Optional rounded corners */
+}
