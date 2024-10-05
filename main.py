@@ -6,11 +6,10 @@ from dotenv import load_dotenv
 from authlib.jose import jwt
 import secrets
 from flask_talisman import Talisman
-from flask_sslify import SSLify
+from werkzeug.middleware.proxy_fix import ProxyFix  # Ensure HTTPS URL generation
 
 # Load environment variables from .env file
 load_dotenv()
-
 
 # Content Security Policy (CSP) to allow external styles and fonts
 csp = {
@@ -30,12 +29,15 @@ csp = {
     ]
 }
 
-
 app = Flask(__name__)
-SSLify =SSLify(app)
 Talisman(app, content_security_policy=csp)
 app.secret_key = os.getenv("SECRET_KEY")
+
+# Force Flask to use HTTPS for generating URLs
 app.config['PREFERRED_URL_SCHEME'] = 'https'
+
+# Apply ProxyFix to trust the X-Forwarded-Proto header (Cloud Run uses this header)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # Initialize OAuth
 oauth = OAuth(app)
@@ -48,25 +50,23 @@ google = oauth.register(
         'scope': 'openid email profile',
         'prompt': 'select_account'
     },
-    redirect_uri="https://rbck.mashwar.in/login/callback"  # Must match with Google Cloud Console
+    redirect_uri=url_for('authorize', _external=True)  # Dynamically generated HTTPS URL
 )
-#redirect_uri="https://rbck.mashwar.in/login/callback"  # Must match with Google Cloud Console
+
 @app.route('/')
 def home():
     # Check if user is logged in by checking session
     user = dict(session).get('profile', None)
-    #return "hello"
     return render_template('index.html', user=user)
 
 @app.route('/login')
 def login():
-    # Generate a secure noncea
+    # Generate a secure nonce
     nonce = secrets.token_urlsafe(16)
     session['nonce'] = nonce  # Store it in session
     
     # Redirect to Google's OAuth 2.0 server for authentication
     redirect_uri = url_for('authorize', _external=True)
-    #redirect_uri="https://rbck.mashwar.in/login/callback" 
     app.logger.info(f"Redirect URI: {redirect_uri}")  # Log the redirect URI
     return google.authorize_redirect(redirect_uri, nonce=nonce)  # Pass the nonce
 
