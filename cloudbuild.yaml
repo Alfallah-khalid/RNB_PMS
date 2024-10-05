@@ -3,5 +3,14 @@ steps:
     args: ['build', '-t', 'gcr.io/speedy-bazaar-382611/flask-app', '.']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/speedy-bazaar-382611/flask-app']
-images:
-  - 'gcr.io/speedy-bazaar-382611/flask-app'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      'run', 'deploy', 'flask-app', 
+      '--image', 'gcr.io/speedy-bazaar-382611/flask-app', 
+      '--platform', 'managed', 
+      '--region', 'us-central1', 
+      '--port', '8080', 
+      '--set-env-vars', 'PORT=8080',
+      '--allow-unauthenticated'
+    ]
+
