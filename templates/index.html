@@ -30,11 +30,11 @@
             <div class="logoutDiv">
                 <h4>Welcome, {{ user['name'] }}!</h4>
                 <p>Email: {{ user['email'] }}</p>
-                <a href="{{ url_for('logout') }}" class="btn-large waves-effect waves-light red">Logout</a></div>
+                <a href="{{ url_for('auth.logout') }}" class="btn-large waves-effect waves-light red">Logout</a></div>
             {% else %}
             
                 <h4>You Have not Logged in...</h4>
-                <a href="{{ url_for('login') }}" class="btn-large waves-effect waves-light teal">Login with Google</a>
+                <a href="{{ url_for('auth.login') }}" class="btn-large waves-effect waves-light teal">Login with Google</a>
             {% endif %}
         </div>
     </main>

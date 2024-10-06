@@ -73,3 +73,26 @@ footer {
 
     border-radius: 5px; /* Optional rounded corners */
 }
+
+
+
+/* Ensure the collapsible takes full width */
+.collapsible {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure the collapsible body takes full width */
+.collapsible-body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Adjust collapsible headers to ensure they take full width */
+.collapsible-header {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

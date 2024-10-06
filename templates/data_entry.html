@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask App</title>
+    
+    <!-- Import Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts for Typography -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Link to your custom external CSS file -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-wrapper teal">
+            <a href="#" class="brand-logo center">{{ format['FormatName'] }} Data Entry</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h4>Enter Data</h4>
+            <form method="POST">
+                {% for field in format['fields'] %}
+                    <div class="input-field">
+                        <input 
+                            id="{{ field['Name'] }}" 
+                            name="{{ field['Name'] }}" 
+                            type="{{ field['type'] }}" 
+                            placeholder="{{ field['Placeholder'] }}">
+                        <label for="{{ field['Name'] }}">{{ field['Placeholder'] }}</label>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn waves-effect waves-light teal">Submit</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 RNB CENTRAL v2. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
