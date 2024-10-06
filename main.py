@@ -7,6 +7,8 @@ from authlib.jose import jwt
 import secrets
 from flask_talisman import Talisman
 from werkzeug.middleware.proxy_fix import ProxyFix  # Ensure HTTPS URL generation
+from firebase_service import FirebaseService as fs
+import datetime
 
 # Load environment variables from .env file
 load_dotenv()
@@ -28,7 +30,7 @@ csp = {
         'https://cdnjs.cloudflare.com'   # Allow Materialize JS
     ]
 }
-
+fs = fs()
 app = Flask(__name__)
 Talisman(app, content_security_policy=csp)
 app.secret_key = os.getenv("SECRET_KEY")
@@ -56,6 +58,10 @@ google = oauth.register(
 def home():
     # Check if user is logged in by checking session
     user = dict(session).get('profile', None)
+    if user!=None:
+        fs.CU(path="Users",document_id=user["email"],data=user)
+        
+
     return render_template('index.html', user=user)
 
 @app.route('/login')
@@ -83,7 +89,11 @@ def authorize():
     # Store user profile information in the session
     session['profile'] = user_info
     session['token'] = token
-    
+    DateData = {
+        'login_time': datetime.datetime.now(),
+        'action': 'successful_login'
+        }
+    print(fs.CU(path=f"Users/{user_info['email']}/logins",document_id=None,data=DateData))    
     return redirect('/')
 
 @app.route('/logout')
