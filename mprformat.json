@@ -1,5 +1,5 @@
 {
-  "format_id": "mpr_other_department_2024",
+  "format_id": "mpr",
   "name": "Monthly Progress Report (MPR) for Other Department Works",
   "description": "Progress report for various works and projects for other departments up to July 31, 2024.",
   "created_at": "2024-10-06T12:00:00Z",
@@ -10,96 +10,146 @@
       "group_title": "Basic Project Information",
       "fields": [
         {
-          "field_name": "s_no",
-          "field_label": "S.No.",
-          "field_type": "number",
-          "field_validation": { "required": true },
-          "ui_options": { "help_text": "Serial number for the row entry." }
-        },
-        {
           "field_name": "intending_department",
           "field_label": "Name of Intending Department",
           "field_type": "text",
-          "field_validation": { "required": true, "max_length": 100 },
-          "ui_options": { "help_text": "Name of the department initiating the project." }
+          "field_validation": {
+            "required": true,
+            "max_length": 100
+          },
+          "ui_options": {
+            "help_text": "Name of the department initiating the project."
+          }
         },
         {
           "field_name": "work_project_name",
           "field_label": "Name of Work/Project",
           "field_type": "text",
-          "field_validation": { "required": true, "max_length": 150 },
-          "ui_options": { "help_text": "Name of the work or project being reported." }
+          "field_validation": {
+            "required": true,
+            "max_length": 150
+          },
+          "ui_options": {
+            "help_text": "Name of the work or project being reported."
+          }
         },
         {
           "field_name": "division",
           "field_label": "Division",
           "field_type": "text",
-          "field_validation": { "required": true, "max_length": 50 },
-          "ui_options": { "help_text": "Name of the division responsible for the work." }
+          "field_validation": {
+            "required": true,
+            "max_length": 50
+          },
+          "ui_options": {
+            "help_text": "Name of the division responsible for the work."
+          }
         },
         {
           "field_name": "sub_division",
           "field_label": "Sub Division",
           "field_type": "text",
-          "field_validation": { "required": true, "max_length": 50 },
-          "ui_options": { "help_text": "Name of the sub-division responsible for the work." }
+          "field_validation": {
+            "required": true,
+            "max_length": 50
+          },
+          "ui_options": {
+            "help_text": "Name of the sub-division responsible for the work."
+          }
         }
-      ]
+      ],
+      "group_icon": "info"
     },
     {
       "group_name": "financial_info",
-      "group_title": "Financial Information",
+      "group_title": "Financial Information (in Lacs)",
       "fields": [
         {
           "field_name": "original_est_cost",
-          "field_label": "Original Estt. Cost (Rs. Lacs)",
+          "field_label": "Original Estt. Cost",
           "field_type": "number",
-          "field_validation": { "required": true, "min_value": 0 },
-          "ui_options": { "help_text": "Original estimated cost of the project in lacs." }
+          "field_validation": {
+            "required": true,
+            "min_value": 0
+          },
+          "ui_options": {
+            "help_text": "Original estimated cost of the project in lacs."
+          }
         },
         {
           "field_name": "revised_est_cost",
-          "field_label": "Revised Estt. Cost (Rs. Lacs)",
+          "field_label": "Revised Estt. Cost",
           "field_type": "number",
-          "field_validation": { "required": false, "min_value": 0 },
-          "ui_options": { "help_text": "Revised estimated cost of the project, if applicable." }
+          "field_validation": {
+            "required": false,
+            "min_value": 0
+          },
+          "ui_options": {
+            "help_text": "Revised estimated cost of the project, if applicable."
+          }
         },
         {
           "field_name": "allotted_cost",
-          "field_label": "Allotted Cost (Rs. Lacs)",
+          "field_label": "Allotted Cost",
           "field_type": "number",
-          "field_validation": { "required": true, "min_value": 0 },
-          "ui_options": { "help_text": "Allotted budget for the project in lacs." }
+          "field_validation": {
+            "required": true,
+            "min_value": 0
+          },
+          "ui_options": {
+            "help_text": "Allotted budget for the project in lacs."
+          }
         },
         {
           "field_name": "cumulative_expenditure",
-          "field_label": "Cumm. Expd. Ending 3/2024 (Rs. Lacs)",
+          "field_label": "Cumm. Expd. Ending 3/2024",
           "field_type": "number",
-          "field_validation": { "required": true, "min_value": 0 },
-          "ui_options": { "help_text": "Cumulative expenditure as of March 2024." }
+          "field_validation": {
+            "required": true,
+            "min_value": 0
+          },
+          "ui_options": {
+            "help_text": "Cumulative expenditure as of March 2024."
+          }
         },
         {
           "field_name": "allocation_2024_25",
-          "field_label": "Allocation 2024-25 (Rs. Lacs)",
+          "field_label": "Allocation 2024-25",
           "field_type": "number",
-          "field_validation": { "required": true, "min_value": 0 },
-          "ui_options": { "help_text": "Budget allocation for the year 2024-25." }
+          "field_validation": {
+            "required": true,
+            "min_value": 0
+          },
+          "ui_options": {
+            "help_text": "Budget allocation for the year 2024-25."
+          }
         },
         {
           "field_name": "funds_released_2024_25",
-          "field_label": "Funds Released 2024-25 (Rs. Lacs)",
+          "field_label": "Funds Released 2024-25",
           "field_type": "number",
-          "field_validation": { "required": true, "min_value": 0 },
-          "ui_options": { "help_text": "Funds released for the project in the year 2024-25." }
+          "field_validation": {
+            "required": true,
+            "min_value": 0
+          },
+          "ui_options": {
+            "help_text": "Funds released for the project in the year 2024-25."
+          }
         },
         {
           "field_name": "expenditure_04_2024",
-          "field_label": "Expenditure 04/2024 (Rs. Lacs)",
+          "field_label": "Expenditure 04/2024",
           "field_type": "number",
-          "field_validation": { "required": true, "min_value": 0 },
-          "ui_options": { "help_text": "Expenditure for the project as of April 2024." }
+          "field_validation": {
+            "required": true,
+            "min_value": 0
+          },
+          "ui_options": {
+            "help_text": "Expenditure for the project as of April 2024."
+          }
         }
-      ]
+      ],
+      "group_icon": "attach_money"
     },
     {
       "group_name": "approval_info",
@@ -109,19 +159,36 @@
           "field_name": "status_aa",
           "field_label": "Status of AA",
           "field_type": "select",
-          "options": ["Approved", "Pending", "Rejected"],
-          "field_validation": { "required": true },
-          "ui_options": { "help_text": "Status of the Administrative Approval (AA) for the project." }
+          "options": [
+            "Approved",
+            "Pending",
+            "Rejected"
+          ],
+          "field_validation": {
+            "required": true
+          },
+          "ui_options": {
+            "help_text": "Status of the Administrative Approval (AA) for the project."
+          }
         },
         {
           "field_name": "status_ts",
           "field_label": "Status of TS",
           "field_type": "select",
-          "options": ["Approved", "Pending", "Rejected"],
-          "field_validation": { "required": true },
-          "ui_options": { "help_text": "Status of the Technical Sanction (TS) for the project." }
+          "options": [
+            "Approved",
+            "Pending",
+            "Rejected"
+          ],
+          "field_validation": {
+            "required": true
+          },
+          "ui_options": {
+            "help_text": "Status of the Technical Sanction (TS) for the project."
+          }
         }
-      ]
+      ],
+      "group_icon": "check_circle_outline"
     },
     {
       "group_name": "technical_info",
@@ -131,10 +198,16 @@
           "field_name": "beam_code",
           "field_label": "Beam Code",
           "field_type": "text",
-          "field_validation": { "required": false, "max_length": 20 },
-          "ui_options": { "help_text": "Beam code associated with the project." }
+          "field_validation": {
+            "required": false,
+            "max_length": 20
+          },
+          "ui_options": {
+            "help_text": "Beam code associated with the project."
+          }
         }
-      ]
+      ],
+      "group_icon": "engineering"
     },
     {
       "group_name": "activity_info",
@@ -144,10 +217,16 @@
           "field_name": "activity_name",
           "field_label": "Activity Name",
           "field_type": "text",
-          "field_validation": { "required": true, "max_length": 150 },
-          "ui_options": { "help_text": "Name of the activity being reported in this progress report." }
+          "field_validation": {
+            "required": true,
+            "max_length": 150
+          },
+          "ui_options": {
+            "help_text": "Name of the activity being reported in this progress report."
+          }
         }
-      ]
+      ],
+      "group_icon": "assignment"
     },
     {
       "group_name": "progress_info",
@@ -157,24 +236,40 @@
           "field_name": "physical_progress",
           "field_label": "Physical Progress (%)",
           "field_type": "number",
-          "field_validation": { "required": true, "min_value": 0, "max_value": 100 },
-          "ui_options": { "help_text": "Percentage of physical progress completed for the project." }
+          "field_validation": {
+            "required": true,
+            "min_value": 0,
+            "max_value": 100
+          },
+          "ui_options": {
+            "help_text": "Percentage of physical progress completed for the project."
+          }
         },
         {
           "field_name": "expected_completion_date",
           "field_label": "Expected Date of Completion",
           "field_type": "date",
-          "field_validation": { "required": true },
-          "ui_options": { "help_text": "Expected date of completion for the project." }
+          "field_validation": {
+            "required": true
+          },
+          "ui_options": {
+            "help_text": "Expected date of completion for the project."
+          }
         },
         {
           "field_name": "total_value_of_work_done",
-          "field_label": "Total Value of Work Done (Rs. Lacs)",
+          "field_label": "Value of Work Done (Rs. Lacs)",
           "field_type": "number",
-          "field_validation": { "required": true, "min_value": 0 },
-          "ui_options": { "help_text": "Total value of the work completed so far." }
+          "field_validation": {
+            "required": true,
+            "min_value": 0
+          },
+          "ui_options": {
+            "help_text": "Total value of the work completed so far."
+          }
         }
-      ]
+      ],
+      "group_icon": "trending_up"
     },
     {
       "group_name": "remarks_info",
@@ -184,10 +279,16 @@
           "field_name": "remarks",
           "field_label": "Remarks",
           "field_type": "textarea",
-          "field_validation": { "required": false, "max_length": 250 },
-          "ui_options": { "help_text": "Additional remarks or comments on the project." }
+          "field_validation": {
+            "required": false,
+            "max_length": 250
+          },
+          "ui_options": {
+            "help_text": "Additional remarks or comments on the project."
+          }
         }
-      ]
+      ],
+      "group_icon": "comment"
     },
     {
       "group_name": "contact_info",
@@ -197,31 +298,52 @@
           "field_name": "aee_name",
           "field_label": "Name of AEE",
           "field_type": "text",
-          "field_validation": { "required": true, "max_length": 100 },
-          "ui_options": { "help_text": "Name of the Assistant Executive Engineer (AEE)." }
+          "field_validation": {
+            "required": true,
+            "max_length": 100
+          },
+          "ui_options": {
+            "help_text": "AEE"
+          }
         },
         {
           "field_name": "aee_mobile",
           "field_label": "Mobile No. of AEE",
           "field_type": "text",
-          "field_validation": { "required": true, "regex": "^\\d{10}$" },
-          "ui_options": { "help_text": "Mobile number of the Assistant Executive Engineer (AEE)." }
+          "field_validation": {
+            "required": true,
+            "regex": "^\\d{10}$"
+          },
+          "ui_options": {
+            "help_text": "Mobile number of the Assistant Executive Engineer (AEE)."
+          }
         },
         {
           "field_name": "je_name",
           "field_label": "Name of JE",
           "field_type": "text",
-          "field_validation": { "required": true, "max_length": 100 },
-          "ui_options": { "help_text": "Name of the Junior Engineer (JE)." }
+          "field_validation": {
+            "required": true,
+            "max_length": 100
+          },
+          "ui_options": {
+            "help_text": "JE"
+          }
         },
         {
           "field_name": "je_mobile",
           "field_label": "Mobile No. of JE",
           "field_type": "text",
-          "field_validation": { "required": true, "regex": "^\\d{10}$" },
-          "ui_options": { "help_text": "Mobile number of the Junior Engineer (JE)." }
+          "field_validation": {
+            "required": true,
+            "regex": "^\\d{10}$"
+          },
+          "ui_options": {
+            "help_text": "Mobile number of the Junior Engineer (JE)."
+          }
         }
-      ]
+      ],
+      "group_icon": "phone"
     }
   ]
 }

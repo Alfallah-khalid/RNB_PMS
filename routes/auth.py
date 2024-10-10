@@ -36,9 +36,11 @@ def authorize():
     # Log the login event in Firebase (storing login time and action)
     DateData = {
         'login_time': datetime.datetime.now(),
-        'action': 'successful_login'
+        'action': 'successful_login',
+        'IP-address' : request.remote_addr
     }
-    fs.CU(path=f"Users/{user_info['email']}/logins", document_id=None, data=DateData)
+    fs.CU(path=f"Users", document_id=user_info["email"], data=DateData)
+    fs.CU(path=f"Users/{user_info['email']}/logins", document_id=str(DateData['login_time']).replace(" ","-"), data=DateData)
 
     # Check if there's a 'next' URL stored in the session
     next_page = session.get('next')
@@ -58,6 +60,16 @@ def logout():
     Logs the user out by clearing the session and redirects to the homepage.
     """
     # Clear the session, logging out the user
+    DateData = {
+        'login_time': datetime.datetime.now(),
+        'action': 'logged out',
+        'IP-address' : request.remote_addr
+    }
+    user_info=session['profile'] 
+
+    fs.CU(path=f"Users", document_id=user_info["email"], data=DateData)
+    fs.CU(path=f"Users/{user_info['email']}/logins", document_id=str(DateData['login_time']).replace(" ","-"), data=DateData)
+
     session.clear()
     return redirect('/')
 

@@ -1,5 +1,3 @@
-
-
 /* Make the body fill the entire height of the page */
 body {
     display: flex;
@@ -16,6 +14,8 @@ main {
     justify-content: center; /* Centers horizontally */
     align-items: center;     /* Centers vertically */
     text-align: center;
+    width: 100%;             /* Ensure main content takes full width */
+    padding: 20px;           /* Add padding for spacing on small screens */
 }
 
 /* Footer stays at the bottom */
@@ -46,7 +46,6 @@ footer {
     text-align: center;
 }
 
-
 /* Ensure the logo text is fully visible and centered */
 .brand-logo {
     display: flex;           /* Use flexbox to center the text */
@@ -65,16 +64,14 @@ footer {
 .brand-logo.center {
     padding: 0 20px;
 }
+
 .logoutDiv {
     position: relative;
     top: 0;
     right: 0;
     padding: 10px;  /* Optional padding */
-
     border-radius: 5px; /* Optional rounded corners */
 }
-
-
 
 /* Ensure the collapsible takes full width */
 .collapsible {
@@ -87,12 +84,51 @@ footer {
 .collapsible-body {
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 10px 20px; /* Ensure the body has proper padding for content spacing */
 }
 
 /* Adjust collapsible headers to ensure they take full width */
 .collapsible-header {
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 10px 0; /* Add some padding for better clickability */
+    font-weight: bold; /* Emphasize collapsible headers */
+}
+
+/* Form container to ensure it centers and takes full width */
+.form-container {
+    max-width: 1200px;
+    width: 100%;       /* Ensure it takes full width */
+    margin: 0 auto;    /* Center the form */
+    padding: 0 20px;   /* Add some padding for better spacing on smaller screens */
+}
+
+/* Ensure input fields are spaced consistently */
+.input-field {
+    margin-bottom: 20px; /* Ensure consistent spacing between fields */
+    width: 100%;         /* Make input fields full width inside their container */
+}
+
+/* Button should take full width on small screens and be centered on larger ones */
+.btn-large {
+    width: 100%; /* Full width on small screens */
+}
+
+@media (min-width: 992px) {
+    .btn-large {
+        width: auto; /* Auto width for large screens */
+    }
+}
+
+/* Collapsible styling for visual distinctness */
+.collapsible {
+    border-radius: 8px; /* Add some rounding to make sections visually distinct */
+}
+
+/* Make the collapsible sections and input fields fully responsive */
+@media (min-width: 768px) {
+    .input-field {
+        width: 48%; /* Adjust to take half width on medium to large screens */
+        margin-right: 2%; /* Add margin to space input fields */
+    }
 }

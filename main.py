@@ -23,7 +23,8 @@ csp = {
     ],
     'script-src': [
         '\'self\'',
-        'https://cdnjs.cloudflare.com'
+        'https://cdnjs.cloudflare.com',
+        'https://unpkg.com'
     ]
 }
 

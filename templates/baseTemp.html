@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your Website Title{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base_style.css') }}">
+    {% block head %}
+
+    {% endblock %}
+</head>
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <img src="/static/logo.png" alt="Logo" width="80" height="80">
+        </div>
+        <div class="header-center">
+            <h3>PWD R&B Central Kashmir</h3>
+            <p>IPRMS</p>
+        </div>
+        <div class="header-right">
+            {% if user %}<a href="{{ url_for('auth.logout') }}"
+                class="btn-large waves-effect waves-light red button">Logout</a>
+            {% else %}<a href="{{ url_for('auth.login') }}" class="btn-large waves-effect waves-light teal button ">Login with
+                Google</a>
+            {% endif %}</button>
+            <div class="welcome-message">
+                {% if user %}
+                Welcome, {{ user['email'] }}
+                {% else %}
+                Hi, You are not Logged in
+                {% endif %}
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <main>
+        <aside class="sidebar">
+            <a href="#home"><i class="fas fa-home"></i> Home</a>
+            <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#services"><i class="fas fa-cogs"></i> Services</a>
+            <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        </aside>
+
+        <section class="content">
+            {% block content %}
+            <!-- Page content goes here -->
+            {% endblock %}
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024 Your Website. All rights reserved.
+    </footer>
+    
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</html>

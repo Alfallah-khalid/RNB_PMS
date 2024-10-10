@@ -1,0 +1,47 @@
+.mg {
+    padding: 0px !important;
+    border: 2px solid #d84315;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    margin: 5px !;
+
+}
+.mg .gh
+{
+    background-color: #d84315;
+    font-size: larger;
+    padding: 3px;
+    padding-left: 20px;
+    color: azure;
+    margin: 0px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
+}
+
+.container {
+    margin-top: 20px;
+    width: 100% !important;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.group {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.input-field {
+    margin-bottom: 15px;
+}
+.row{
+    margin: 15px;
+}
+.pd
+{
+padding: 5px !important;
+margin: 0px !important;
+}

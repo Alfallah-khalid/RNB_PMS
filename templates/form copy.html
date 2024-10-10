@@ -1,58 +1,57 @@
 {% extends 'baseTemp.html' %}
 
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='fg.css') }}">
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
-{% endblock %}
-
 {% block content %}
 <form method="POST">
-    <div class="container col s12 m12">
-        <div class="row massr col s12 m12">
-            <!-- Loop through each group in format.groups -->
-            {% for group in format.field_groups %}
-
-            <!-- Assign column sizes dynamically -->
-            <div class="pd col s12 {% if group.column_size %} {{ group.column_size }} {% else %} m6 {% endif %}">
-                <div class="col s12 m12 mg">
-                    <div class="gh">{{ group.group_title }}</div>
-                    <div class="row pd">
-                        <!-- Loop through fields within each group -->
+    <!-- Ensure the form is within a full-width container -->
+    <div class="col s12"> <!-- Full width column for collapsible groups -->
+        <ul class="collapsible">
+            {% for group in field_groups %}
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">{{ group.group_icon}}</i> {{ group.group_title }}
+                </div>
+                <div class="collapsible-body">
+                    <div class="row">
                         {% for field in group.fields %}
-                        <div
-                            class="input-field col s12 {% if field.column_size %} {{ field.column_size }} {% else %} m6 {% endif %}">
+                        <div class="input-field col s12 m6"> <!-- Full width on small screens, half on medium/large -->
                             <label for="{{ field.field_name }}">{{ field.field_label }}</label>
 
-                            <!-- Render different types of fields based on field type -->
                             {% if field.field_type == 'text' %}
                             <input type="text" id="{{ field.field_name }}" name="{{ field.field_name }}"
                                 value="{{ field.field_value }}" placeholder="{{ field.ui_options.placeholder }}" {% if
-                                field.field_validation and field.field_validation.required %} required {% endif %}>
+                                field.field_validation and field.field_validation.required %}required{% endif %}>
 
                             {% elif field.field_type == 'number' %}
                             <input type="number" id="{{ field.field_name }}" name="{{ field.field_name }}"
                                 value="{{ field.field_value }}" {% if field.field_validation and
-                                field.field_validation.required %} required {% endif %}
-                                min="{{ field.field_validation.min_value }}"
-                                max="{{ field.field_validation.max_value }}">
+                                field.field_validation.required %}required{% endif %} {% if field.field_validation and
+                                field.field_validation.min_value is not none
+                                %}min="{{ field.field_validation.min_value }}" {% endif %} {% if field.field_validation
+                                and field.field_validation.max_value is not none
+                                %}max="{{ field.field_validation.max_value }}" {% endif %}>
 
                             {% elif field.field_type == 'select' %}
                             <select id="{{ field.field_name }}" name="{{ field.field_name }}" class="browser-default">
                                 {% for option in field.field_options %}
-                                <option value="{{ option }}" {% if field.field_value==option %} selected {% endif %}>{{
+                                <option value="{{ option }}" {% if field.field_value==option %}selected{% endif %}>{{
                                     option }}</option>
                                 {% endfor %}
                             </select>
 
+                            {% elif field.field_type == 'date' %}
+                            <input type="text" class="datepicker" id="{{ field.field_name }}"
+                                name="{{ field.field_name }}" value="{{ field.field_value }}" {% if
+                                field.field_validation and field.field_validation.required %}required{% endif %}>
+
                             {% elif field.field_type == 'textarea' %}
                             <textarea id="{{ field.field_name }}" name="{{ field.field_name }}"
                                 class="materialize-textarea" {% if field.field_validation and
-                                field.field_validation.required %} required {% endif %}>
-                            {{ field.field_value }}
-                        </textarea>
+                                field.field_validation.required %}required{% endif %}>
+                                            {{ field.field_value }}
+                                        </textarea>
                             {% endif %}
 
-                            <!-- Tooltip for help text if available -->
+                            <!-- Tooltip for help text -->
                             {% if field.ui_options.help_text %}
                             <i class="material-icons tooltipped" data-position="top"
                                 data-tooltip="{{ field.ui_options.help_text }}">help_outline</i>
@@ -61,9 +60,9 @@
                         {% endfor %}
                     </div>
                 </div>
-            </div>
+            </li>
             {% endfor %}
-        </div>
+        </ul>
     </div>
 
     <!-- Submit Button -->
