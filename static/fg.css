@@ -1,22 +1,27 @@
-.mg {
+.group-container{
+    border: 7px !important;
+    border-radius: 15px !important;
+    border-color: black;
+    margin-bottom: 10px !important;
     padding: 0px !important;
-    border: 2px solid #d84315;
-    border-radius: 15px;
-    background-color: whitesmoke;
-    margin: 5px !;
-
+    
 }
-.mg .gh
-{
-    background-color: #d84315;
-    font-size: larger;
-    padding: 3px;
-    padding-left: 20px;
-    color: azure;
-    margin: 0px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
 
+.group-header{
+    border: 0px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding-left: 15px;
+    padding-top: 7px;
+    padding-bottom: 3px;
+    vertical-align: top;
+    
+}
+
+.group-header span{
+margin-left: 10px;
+padding-right: 10px;
+vertical-align: top;
 }
 
 .container {
@@ -44,4 +49,45 @@ h2 {
 {
 padding: 5px !important;
 margin: 0px !important;
+}
+.fg{
+    display: block;
+}
+
+
+#form-container {
+    width: 100%;
+    height: auto;
+    overflow: visible; /* Ensures dynamic content is displayed */
+    margin-bottom: 20px; /* Adds spacing between dynamic content and the submit button */
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.content{
+    padding: 0px;
+}
+
+.content.row{
+    margin: 0px;
+}
+
+form{
+    height: auto;
+}
+
+.row{
+    height: auto;
+}
+
+.fields-container{
+    padding: 17px;
 }

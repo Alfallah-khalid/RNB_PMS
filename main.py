@@ -15,16 +15,25 @@ csp = {
     'style-src': [
         '\'self\'',
         'https://cdnjs.cloudflare.com',
-        'https://fonts.googleapis.com'
+        'https://fonts.googleapis.com',
+        'https://cdn.jsdelivr.net',
+        'https://bossanova.uk',
+        'https://jsuites.net'
     ],
     'font-src': [
         'https://fonts.gstatic.com',
-        'https://cdnjs.cloudflare.com'
+        'https://cdnjs.cloudflare.com',
+        'https://fonts.googleapis.com'
     ],
     'script-src': [
         '\'self\'',
         'https://cdnjs.cloudflare.com',
-        'https://unpkg.com'
+        'https://unpkg.com',
+        'https://cdn.jsdelivr.net',
+        'https://code.jquery.com',
+        'https://bossanova.uk',
+        'https://jsuites.net'
+
     ]
 }
 

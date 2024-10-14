@@ -1,16 +1,12 @@
 {% extends 'baseTemp.html' %}
 
-
-
 {% block head %}
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
-<link rel="stylesheet" href="{{ url_for('static', filename='fg.css') }}">
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
-
+<link rel="stylesheet" href="{{ url_for('static', filename='ts.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='hd.css') }}">
+  
 <!-- Load Handsontable -->
-
+<script src="https://cdn.jsdelivr.net/npm/handsontable@12.1.0/dist/handsontable.full.min.js"></script>
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@12.1.0/dist/handsontable.full.min.css" /> -->
 
 {% endblock %}
@@ -19,9 +15,16 @@
 <form method="POST">
     <div class="row">
         <div id="data-container" class="hide">{{format}}</div>
+        <div class="collapse-buttons" id="dynamic-buttons"></div>
 
-        <div id="form-container" class="row massr col s12 m12">.</div>
+        <div id="spreadsheet"></div>
+      
+
+        
+
     </div>
+    
+
 
     <div class="row">
         <div class="col s12 center-align">
@@ -30,5 +33,5 @@
     </div>
 </form>
 
-<script src="{{ url_for('static', filename='js/form-scripts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table-scripts.js') }}"></script>
 {% endblock %}

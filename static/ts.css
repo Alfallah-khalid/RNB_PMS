@@ -1,0 +1,70 @@
+#data-container {
+    display: none !important;
+    
+}
+
+ /* Prevent user from selecting button text */
+
+
+  .content{
+    padding-top: 0px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .collapse-buttons {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.collapse-button {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    user-select: none; /* Prevent text selection */
+    transition: all 0.7s ease; /* Smooth transition for button state */
+    text-transform: none; /* Prevent uppercase transformation */
+}
+
+.collapse-button:hover {
+    background-color: darkgray;
+    font-weight: bold;
+}
+
+.material-icons {
+    margin-right: 5px;
+    user-select: none; /* Prevent icon text selection */
+}
+
+.collapse-button span {
+    opacity: 0;
+    max-width: 0;
+    overflow: hidden;
+    transition: all 0.7s ease; /* Transition for hiding/showing the label */
+}
+
+/* Show label when the button is in collapsed state */
+.collapse-button.collapsed span {
+    opacity: 1;
+    max-width: 500px; /* Allow the label to fully expand */
+    overflow: visible;
+    font-size: 16px;
+    transition: all 0.7s ease; /* Transition effect for the label */
+}
+

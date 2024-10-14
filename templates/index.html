@@ -1,50 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'baseTemp.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask App</title>
-    
-    <!-- Import Materialize CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    
-    <!-- Google Fonts for Typography -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspreadsheet-ce@5.1.1/dist/jspreadsheet.css" />
+<script src="https://cdn.jsdelivr.net/npm/jspreadsheet-ce@5.1.1/dist/jspreadsheet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jexcel-formula@3.0.1/dist/formula.js"></script>
+{% endblock %}
 
-    <!-- Link to your custom external CSS file -->
-    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
-</head>
+{% block content %}
 
-<body>
+<div >
+    <div>
+        <h1> Welcome To R&B Central Kashmir</h1>
+    </div>
+</div>
 
-    <nav>
-        <div class="nav-wrapper teal">
-            <a href="#" class="brand-logo center">1...PWD R&B Project Reporting and Monitoring System...</a>
-        </div>
-    </nav>
 
-    <main>
-        <div class="container">
-            {% if user %}
-            <div class="logoutDiv">
-                <h4>Welcome, {{ user['name'] }}!</h4>
-                <p>Email: {{ user['email'] }}</p>
-                <a href="{{ url_for('auth.logout') }}" class="btn-large waves-effect waves-light red">Logout</a></div>
-            {% else %}
-            
-                <h4>You Have not Logged in...</h4>
-                <a href="{{ url_for('auth.login') }}" class="btn-large waves-effect waves-light teal">Login with Google</a>
-            {% endif %}
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 RNB CENTRAL v2. All Rights Reserved.</p>
-    </footer>
-
-    <!-- Import Materialize JavaScript and dependencies -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-
-</html>
+{% endblock %}

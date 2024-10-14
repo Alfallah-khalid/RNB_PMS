@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Handsontable with Unique Rows</title>
+  <!-- Load Material Icons from Google -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <!-- Load Handsontable -->
+  <script src="https://cdn.jsdelivr.net/npm/handsontable@12.1.0/dist/handsontable.full.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@12.1.0/dist/handsontable.full.min.css" />
+  
+  <style>
+    .collapse-buttons {
+      margin-bottom: 10px;
+    }
+
+    .collapse-button {
+      cursor: pointer;
+      padding: 5px 10px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      font-size: 16px;
+      user-select: none; /* Prevent text selection */
+    }
+
+    .collapse-button:hover {
+      background-color: darkgray;
+    }
+
+    .material-icons {
+      margin-right: 5px;
+      user-select: none; /* Prevent icon text selection */
+    }
+
+    /* Prevent user from selecting button text */
+    .collapse-button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic buttons will go here -->
+  <div class="collapse-buttons" id="dynamic-buttons"></div>
+
+  <div id="spreadsheet"></div>
+
+  <script>
+    // JSON object (this would normally be loaded from a server)
+    const reportData = {
+      "format_id": "mpr",
+      "name": "Monthly Progress Report (MPR) for Other Department Works",
+      "description": "Progress report for various works and projects for other departments up to July 31, 2024.",
+      "created_at": "2024-10-06T12:00:00Z",
+      "updated_at": "2024-10-06T12:00:00Z",
+      "field_groups": [
+        {
+          "group_name": "basic_info",
+          "group_title": "Basic Project Information",
+          "group_color": "#AEC6CF",  // Pastel blue
+          "fields": [
+            {
+              "field_name": "intending_department",
+              "field_label": "Name of Intending Department",
+              "field_type": "text"
+            },
+            {
+              "field_name": "work_project_name",
+              "field_label": "Name of Work/Project",
+              "field_type": "text"
+            }
+          ],
+          "group_icon": "info"
+        },
+        {
+          "group_name": "financial_info",
+          "group_title": "Financial Information (in Lacs)",
+          "group_color": "#FFB347",  // Pastel orange
+          "fields": [
+            {
+              "field_name": "original_est_cost",
+              "field_label": "Original Estt. Cost",
+              "field_type": "number"
+            },
+            {
+              "field_name": "revised_est_cost",
+              "field_label": "Revised Estt. Cost",
+              "field_type": "number"
+            }
+          ],
+          "group_icon": "attach_money"
+        }
+      ]
+    };
+
+    // Function to build Handsontable settings from JSON
+    function buildTableFromJson(reportData) {
+      const fieldGroups = reportData.field_groups;
+      const nestedHeaders = [];
+      const columns = [];
+      const buttonContainer = document.getElementById('dynamic-buttons');
+      let rowHeaders = [];
+
+      // Prepare the first row of nested headers (group headers)
+      const groupHeaders = [];
+      const individualHeaders = [];
+      const columnIndicesPerGroup = [];  // To track column indices for each group
+
+      // Loop through each group and field
+      fieldGroups.forEach((group, groupIndex) => {
+        const groupTitle = group.group_title;
+        const groupColor = group.group_color;
+        const groupIcon = group.group_icon;
+        const columnIndices = []; // To track indices for this group
+
+        // Create buttons for each group to toggle visibility
+        const button = document.createElement('span');
+        button.className = 'collapse-button';
+        button.style.backgroundColor = groupColor;
+        button.innerHTML = `<i class="material-icons">${groupIcon}</i> ${groupTitle}`;
+        buttonContainer.appendChild(button);
+
+        // Prevent text selection on button click
+        button.addEventListener('mousedown', function (e) {
+          e.preventDefault();
+        });
+
+        // Prepare group header
+        groupHeaders.push({ label: groupTitle, colspan: group.fields.length });
+
+        // Prepare individual headers and column settings
+        group.fields.forEach((field, fieldIndex) => {
+          individualHeaders.push(field.field_label);
+          
+          // Determine the field type and set appropriate Handsontable column config
+          let columnConfig = {
+            data: field.field_name, 
+            type: field.field_type === 'number' ? 'numeric' : 'text'
+          };
+          columns.push(columnConfig);
+
+          // Track column index for this group
+          columnIndices.push(columns.length - 1); // Store the current column index
+        });
+
+        // Store column indices for toggling
+        columnIndicesPerGroup.push(columnIndices);
+
+        // Add event listener to the button for hiding/showing this group's columns
+        button.addEventListener('click', function () {
+          const currentHiddenColumns = hot.getSettings().hiddenColumns.columns || [];
+          const allColumnsVisible = columnIndices.every(index => !currentHiddenColumns.includes(index));
+          const newHiddenColumns = allColumnsVisible
+            ? [...currentHiddenColumns, ...columnIndices]
+            : currentHiddenColumns.filter(index => !columnIndices.includes(index));
+
+          hot.updateSettings({
+            hiddenColumns: {
+              columns: newHiddenColumns,
+              indicators: true
+            }
+          });
+        });
+      });
+
+      // Add headers for Handsontable configuration
+      nestedHeaders.push(groupHeaders);
+      nestedHeaders.push(individualHeaders);
+
+      return { nestedHeaders, columns };
+    }
+
+    // Dynamically generate table structure from JSON
+    const tableSettings = buildTableFromJson(reportData);
+
+    const container = document.getElementById("spreadsheet");
+    const hot = new Handsontable(container, {
+      data: Array.from({ length: 5 }, () => ({})),  // Create 5 unique empty rows
+      colHeaders: true,
+      rowHeaders: true,
+      height: 450,
+      nestedHeaders: tableSettings.nestedHeaders,
+      columns: tableSettings.columns,
+      hiddenColumns: {
+        columns: [],
+        indicators: true
+      },
+      contextMenu: true,
+      dropdownMenu: true,
+      manualColumnResize: true,
+      licenseKey: 'non-commercial-and-evaluation' // Free version of Handsontable
+    });
+
+    // Apply custom colors for the headers dynamically based on group_color
+    hot.updateSettings({
+      afterGetColHeader: function (col, TH) {
+        const groupHeader = tableSettings.nestedHeaders[0];
+        let startColIndex = 0;
+        for (let i = 0; i < groupHeader.length; i++) {
+          const group = groupHeader[i];
+          if (col >= startColIndex && col < startColIndex + group.colspan) {
+            TH.style.backgroundColor = reportData.field_groups[i].group_color;
+            break;
+          }
+          startColIndex += group.colspan;
+        }
+      },
+
+      // Apply row colors dynamically
+      afterRenderer: function (TD, row, col) {
+        const groupHeader = tableSettings.nestedHeaders[0];
+        let startColIndex = 0;
+
+        for (let i = 0; i < groupHeader.length; i++) {
+          const group = groupHeader[i];
+          if (col >= startColIndex && col < startColIndex + group.colspan) {
+            TD.style.backgroundColor = reportData.field_groups[i].group_color;
+            break;
+          }
+          startColIndex += group.colspan;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

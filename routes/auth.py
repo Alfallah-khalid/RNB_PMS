@@ -57,19 +57,26 @@ def authorize():
 @bp.route('/logout')
 def logout():
     """
-    Logs the user out by clearing the session and redirects to the homepage.
+    Logs the user out by clearing the session and redirects to the referring page or homepage if referrer is not available.
     """
-    # Clear the session, logging out the user
+    # Capture current time and IP address for logging purposes
     DateData = {
         'login_time': datetime.datetime.now(),
         'action': 'logged out',
         'IP-address' : request.remote_addr
     }
-    user_info=session['profile'] 
 
-    fs.CU(path=f"Users", document_id=user_info["email"], data=DateData)
-    fs.CU(path=f"Users/{user_info['email']}/logins", document_id=str(DateData['login_time']).replace(" ","-"), data=DateData)
+    # Get user info from session
+    user_info = session.get('profile')
 
+    # If user is logged in (session has profile info), log the action in Firebase
+    if user_info:
+        fs.CU(path=f"Users", document_id=user_info["email"], data=DateData)
+        fs.CU(path=f"Users/{user_info['email']}/logins", document_id=str(DateData['login_time']).replace(" ", "-"), data=DateData)
+
+    # Clear the session to log out the user
     session.clear()
-    return redirect('/')
+
+    # Redirect to the referring page or fallback to homepage if no referrer is available
+    return redirect(request.referrer or '/')
 
