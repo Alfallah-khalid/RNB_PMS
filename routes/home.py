@@ -14,3 +14,12 @@ def home():
     if user is not None:
         fs.CU(path="Users", document_id=user["email"], data=user)
     return render_template('index.html', user=user)
+
+
+@bp.route('/Privacy_Policy')
+def pp():
+    user = dict(session).get('profile', None)
+    print(session)  # Print session to debug if it's holding the profile data correctly
+    if user is not None:
+        fs.CU(path="Users", document_id=user["email"], data=user)
+    return render_template('P_Policy.html', user=user)
