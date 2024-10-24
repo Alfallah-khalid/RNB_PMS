@@ -1,114 +1,55 @@
 {
-    "created_at": "2024-10-12",
-    "description": "Red Account details of Circular Road Project, Srinagar City (2012-2024)",
-    "format_id": "CRP",
-    "name": "Circular Road Project Red Account",
-    "updated_at": "2024-10-12",
-    "creator": "Superintending Engineer, PW R&B Circle, North Srinagar",
+    "created_at": "2024-10-21",
+    "description": "A table capturing details about various works and their financial statuses.",
+    "format_id": "iv",
+    "name": "Work Payment Table",
+    "updated_at": "2024-10-21",
+    "creator": "User",
     "field_groups": [
-        {
-            "group_color": "#a3d5d3",
-            "group_icon": "account_balance",
-            "group_name": "road_funding",
-            "group_title": "Red Account Road Funding Details",
-            "fields": [
-                {
-                    "field_label": "S.No",
-                    "field_name": "serial_number",
-                    "field_type": "integer",
-                    "field_attributes": {
-                        "required": true,
-                        "min_value": 1
-                    }
-                },
-                {
-                    "field_label": "Name of Road",
-                    "field_name": "road_name",
-                    "field_type": "string",
-                    "field_attributes": {
-                        "required": true,
-                        "max_length": 255
-                    }
-                },
-                {
-                    "field_label": "Funds Received",
-                    "field_name": "funds_received",
-                    "field_type": "decimal",
-                    "field_attributes": {
-                        "required": true,
-                        "min_value": 0
-                    }
-                },
-                {
-                    "field_label": "Funds Disbursed",
-                    "field_name": "funds_disbursed",
-                    "field_type": "decimal",
-                    "field_attributes": {
-                        "required": true,
-                        "min_value": 0
-                    }
-                },
-                {
-                    "field_label": "Balance Amount",
-                    "field_name": "balance_amount",
-                    "field_type": "decimal",
-                    "field_attributes": {
-                        "required": true,
-                        "min_value": 0
-                    }
-                },
-                {
-                    "field_label": "Name of House Owner",
-                    "field_name": "house_owner_name",
-                    "field_type": "string",
-                    "field_attributes": {
-                        "required": false,
-                        "max_length": 255
-                    }
-                },
-                {
-                    "field_label": "Structure No.",
-                    "field_name": "structure_number",
-                    "field_type": "string",
-                    "field_attributes": {
-                        "required": false,
-                        "max_length": 100
-                    }
-                },
-                {
-                    "field_label": "Awarded Amount",
-                    "field_name": "awarded_amount",
-                    "field_type": "decimal",
-                    "field_attributes": {
-                        "required": true,
-                        "min_value": 0
-                    }
-                },
-                {
-                    "field_label": "Amount Released",
-                    "field_name": "amount_released",
-                    "field_type": "decimal",
-                    "field_attributes": {
-                        "required": true,
-                        "min_value": 0
-                    }
-                },
-                {
-                    "field_label": "Remarks",
-                    "field_name": "remarks",
-                    "field_type": "string",
-                    "field_attributes": {
-                        "required": false,
-                        "max_length": 500
-                    }
-                }
-            ]
-        }
+      {
+        "group_color": "#AEC6CF",
+        "group_icon": "work",
+        "group_name": "Work Details",
+        "group_title": "Information about the work and its payment status",
+        "fields": [
+          {
+            "field_label": "Name of Work",
+            "field_name": "name_of_work",
+            "field_type": "text",
+            "field_attributes": {
+              "required": true,
+              "maxLength": 255
+            }
+          },
+          {
+            "field_label": "Estimated",
+            "field_name": "estimated",
+            "field_type": "number",
+            "field_attributes": {
+              "required": true,
+              "min": 0
+            }
+          },
+          {
+            "field_label": "Allotted",
+            "field_name": "allotted",
+            "field_type": "number",
+            "field_attributes": {
+              "required": true,
+              "min": 0
+            }
+          },
+          {
+            "field_label": "Payment Till Date",
+            "field_name": "payment_till_date",
+            "field_type": "number",
+            "field_attributes": {
+              "required": true,
+              "min": 0
+            }
+          }
+        ]
+      }
     ]
-}
-
-
-
-  {"message": "{"created_at":"2024-10-09","description":"Form description here","format_id":"FORM001","name":"Form Name","updated_at":"2024-10-09","creator":"Creator Name","field_groups":[{"group_color":"#B6D7A8","group_icon":"work","group_name":"Work Details","group_title":"Work Information","fields":[{"field_label":"Field Label","field_name":"field_name","field_type":"text","field_attributes":{"required":true,"maxLength":100}}]}]}",
-"userId": 1
-}
+  }
+  

@@ -7,6 +7,7 @@
   
 <!-- Load Handsontable -->
 <script src="https://cdn.jsdelivr.net/npm/handsontable@12.1.0/dist/handsontable.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@12.1.0/dist/handsontable.full.min.css" /> -->
 
 {% endblock %}
@@ -14,7 +15,8 @@
 {% block content %}
 <form method="POST">
     <div class="row">
-        <div id="data-container" class="hide">{{format}}</div>
+        <div id="format-container" class="hide">{{format}}</div>
+        <div id="data-container" class="hide">{{data}}</div>
         <div class="collapse-buttons" id="dynamic-buttons"></div>
 
         <div id="spreadsheet"></div>
@@ -27,6 +29,9 @@
 
 
     <div class="row">
+        <div class="col s12 left-align">
+            <button id="export" type="button" class="btn-small waves-effect waves-light green">Export</button>
+        </div>
         <div class="col s12 center-align">
             <button type="submit" class="btn-small waves-effect waves-light teal">Submit</button>
         </div>

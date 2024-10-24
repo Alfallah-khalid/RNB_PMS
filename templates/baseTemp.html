@@ -13,6 +13,7 @@
 
     {% endblock %}
 </head>
+<meta http-equiv="Content-Security-Policy" content="style-src 'self' 'sha256-BKeCINbFKNor9SzO2zcEW0COcUSsI27Xd1P7KOsD2Is='">
 
 <body>
 
@@ -53,6 +54,7 @@
             {% block content %}
             <!-- Page content goes here -->
             {% endblock %}
+            {{mainMsg}}
         </section>
     </main>
 

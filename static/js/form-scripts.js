@@ -79,10 +79,68 @@ function buildDivsFromJson(reportData) {
 }
 
 // Initialize the dynamic div-based HTML structure
-buildDivsFromJson(jasonData);
+buildDivsFromJson(formatData);
 
 
 window.onresize = function() {
     const container = document.getElementById('form-container'); // This is where the groups will be placed
     //container.style.height = 'auto'; // Reset any fixed height
 };
+
+
+
+
+
+
+
+
+
+// Get the submit button
+const submitButton = document.querySelector('button[type="submit"]');
+
+// Event listener for form submission
+submitButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    handleSubmit();
+});
+
+// Function to handle the form submission
+function handleSubmit() {
+    // Collect form data
+    const formData = {};
+    const fieldInputs = document.querySelectorAll('.field-input');
+    fieldInputs.forEach(input => {
+        formData[input.name] = input.value;
+    });
+
+    // Add metadata
+
+
+    // Convert to JSON
+    const jsonData = JSON.stringify(formData);
+
+    // Send JSON data to the server
+    sendJsonData(jsonData);
+}
+
+// Function to send JSON data to the server
+function sendJsonData(jsonData) {
+    fetch('/submitForm', {  // Replace '/your-endpoint-url' with your actual backend endpoint
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    .then(response => response.json())
+    .then(data => {
+        data
+        console.log('Success:', data);
+        // You can add code here to handle a successful submission, like showing a success message
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        // Handle error case
+    });
+}
+
