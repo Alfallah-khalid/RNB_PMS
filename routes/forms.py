@@ -27,29 +27,35 @@ def render_form(format_id):
 @bp.route('/tables/<format_id>', methods=['GET', 'POST'])
 @login_required
 def render_table(format_id):
-    uemail=session['profile']['email']
-    # Fetch the format structure from Firebase
-    format = fs.G("formats", document_id=format_id)
-    aw={}
-    try:
-        aw=format["allowedUsers"]
-        print(aw)
-    except:
-        print("no Allowed used")
-    if uemail in aw:
-    # Extract field_groups from the format_data
-        field_groups = format.get('field_groups', [])
+    user_email = session['profile']['email']
+    format_data = fs.G("formats", document_id=format_id)
+    allowed_users = format_data.get("allowedUsers", None)
 
-        data=fs.G(f"tableData/{format_id}/data", document_id=uemail)
-        try:
-            data=data.get('table_data',[])
-        except:
-            data={}
+    if allowed_users is not None:
+        if user_email not in allowed_users:
+            return render_template(
+                'basetemp.html',
+                mainMsg="You are not authorized, Please Login with a Different ID (Hint: Office email)",
+                user=session['profile']
+            )
 
-    # Render the form with the field_groups
-        return render_template('table.html', format=json.dumps(format),user=session['profile'],data=json.dumps(data))
+    field_groups = format_data.get('field_groups', [])
+    user_data = fs.G(f"tableData/{format_id}/data", document_id=user_email)
+
+    # Check if user_data is None before attempting to access 'table_data'
+    if user_data is None:
+        table_data = []
     else:
-        return render_template('basetemp.html',mainMsg="You are not authorized, Please Login with a Differnt ID (Hint Office )",user=session['profile'])
+        table_data = user_data.get('table_data', [])
+
+    return render_template(
+        'table.html',
+        format=json.dumps(format_data),
+        user=session['profile'],
+        data=json.dumps(table_data)
+    )
+
+
 
 
 @bp.route('/submitForm', methods=['GET', 'POST'])

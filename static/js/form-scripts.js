@@ -9,7 +9,7 @@ var msnry = new Masonry( elem, {
 
 // Get the data container and parse JSON data
 const dataContainer = document.getElementById('data-container');
-let jasonData = JSON.parse(dataContainer.innerText);  // Parse JSON data
+let jsonData = JSON.parse(dataContainer.innerText);  // Parse JSON data
 
 // Function to build the dynamic div-based structure from the JSON data
 function buildDivsFromJson(reportData) {
@@ -79,7 +79,7 @@ function buildDivsFromJson(reportData) {
 }
 
 // Initialize the dynamic div-based HTML structure
-buildDivsFromJson(formatData);
+buildDivsFromJson(jsonData);
 
 
 window.onresize = function() {
