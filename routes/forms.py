@@ -34,7 +34,7 @@ def render_table(format_id):
     if allowed_users is not None:
         if user_email not in allowed_users:
             return render_template(
-                'basetemp.html',
+                'baseTemp.html',
                 mainMsg="You are not authorized, Please Login with a Different ID (Hint: Office email)",
                 user=session['profile']
             )

@@ -70,3 +70,12 @@
     transition: all 0.7s ease; /* Transition effect for the label */
 }
 
+.cell-with-border {
+    border: 0.2px solid #000; /* Light gray border */
+    box-sizing: border-box; /* Ensure borders are included in cell width */
+}
+
+.ht_master .htCore th, .ht_master .htCore td {
+    border: 0.02px solid #000; /* Add borders to header cells as well */
+    box-sizing: border-box; /* Ensure borders are included in cell width */
+}

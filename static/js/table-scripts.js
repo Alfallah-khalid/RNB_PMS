@@ -92,6 +92,12 @@ function initializeHandsontable(reportData, tableData) {
     const tableSettings = buildTableFromJson(reportData);
     const container = document.getElementById("spreadsheet");
 
+
+    if (tableData.length === 0) {
+        const defaultRow = tableSettings.columns.map(() => null); // Create a blank row with `null` values
+        tableData.push(defaultRow);
+    }
+
     hot = new Handsontable(container, {
         data: tableData,
         colHeaders: true,
