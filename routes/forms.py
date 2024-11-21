@@ -27,10 +27,17 @@ def render_form(format_id):
 @bp.route('/tables/<format_id>', methods=['GET', 'POST'])
 @login_required
 def render_table(format_id):
-    user_email = session['profile']['email']
+    # Get the UID from headers if present, else fallback to session email
+    
+    uid = request.args.get('uid')
+    print(uid)
+    user_email = uid if uid else session['profile']['email']
+    print(user_email)
+    # Fetch format data from the database
     format_data = fs.G("formats", document_id=format_id)
     allowed_users = format_data.get("allowedUsers", None)
 
+    # Authorization check
     if allowed_users is not None:
         if user_email not in allowed_users:
             return render_template(
@@ -38,7 +45,8 @@ def render_table(format_id):
                 mainMsg="You are not authorized, Please Login with a Different ID (Hint: Office email)",
                 user=session['profile']
             )
-
+    
+    # Fetch field groups and user-specific data
     field_groups = format_data.get('field_groups', [])
     user_data = fs.G(f"tableData/{format_id}/data", document_id=user_email)
 
@@ -47,13 +55,14 @@ def render_table(format_id):
         table_data = []
     else:
         table_data = user_data.get('table_data', [])
-
+    
     return render_template(
         'table.html',
         format=json.dumps(format_data),
         user=session['profile'],
         data=json.dumps(table_data)
     )
+
 
 
 
