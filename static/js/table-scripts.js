@@ -102,6 +102,7 @@ function initializeHandsontable(reportData, tableData) {
         data: tableData,
         colHeaders: true,
         rowHeaders: true,
+        autoColumnSize: false,
         height: 450,
         nestedHeaders: tableSettings.nestedHeaders,
         columns: tableSettings.columns,

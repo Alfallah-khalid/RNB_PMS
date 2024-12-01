@@ -4,40 +4,24 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='ts.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='hd.css') }}">
-  
+
 <!-- Load Handsontable -->
 <script src="https://cdn.jsdelivr.net/npm/handsontable@12.1.0/dist/handsontable.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@12.1.0/dist/handsontable.full.min.css" /> -->
-
 {% endblock %}
-
 {% block content %}
 <form method="POST">
-    <div class="row">
+    <div class="row" style="flex: 1; flex-direction: column;">
         <div id="format-container" class="hide">{{format}}</div>
         <div id="data-container" class="hide">{{data}}</div>
         <div class="collapse-buttons" id="dynamic-buttons"></div>
-
         <div id="spreadsheet"></div>
-      
-
-        
-
     </div>
-    
-
-
     <div class="row">
-        
-            <button id="export" type="button" class="btn-small waves-effect waves-light green left-align">Export</button>
-            <button type="submit" class="btn-small waves-effect waves-light teal center-align">Submit</button>
-        
-        <div class="col s12 center-align">
-            
-        </div>
+        <button id="export" type="button" class="btn-small waves-effect waves-light green left-align">Export</button>
+        <button type="submit" class="btn-small waves-effect waves-light teal center-align">Submit</button>
     </div>
 </form>
-
 <script src="{{ url_for('static', filename='js/table-scripts.js') }}"></script>
 {% endblock %}

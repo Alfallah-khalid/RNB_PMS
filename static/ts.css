@@ -79,3 +79,8 @@
     border: 0.02px solid #000; /* Add borders to header cells as well */
     box-sizing: border-box; /* Ensure borders are included in cell width */
 }
+
+#spreadsheet {
+    flex: 1; /* Take up all available space */
+    overflow: auto; /* Add scrolling if content overflows */
+}

@@ -44,3 +44,16 @@ def process_json():
         return jsonify({"status": "success", "received": adata}), 200
     else:
         return jsonify({"status": "error", "message": "'message' key not found in the request"}), 400
+    
+
+@bp.route('/get_tableData', methods=['GET', 'POST'])
+def get_json():
+    format_id = request.args.get('format_id') or request.json.get('format_id')
+    # Get the JSON object from the request
+    data = fs.GC(f"tableData/{format_id}/data")
+    
+    # Parse the 'message' key into a dictionary if it's a string
+    if data:
+        return data
+    else:
+        return jsonify({"status": "error", "message": "Data not found"}), 400

@@ -96,6 +96,12 @@ class FirebaseService:
         doc = doc_ref.get()
         return doc.to_dict() if doc.exists else None
     
+    @firestore_error_handler
+    def GC(self, collection_name):
+        collection_ref = self.db.collection(collection_name)
+        docs = collection_ref.stream()
+        return [doc.to_dict() for doc in docs if doc.exists]
+    
 
     @firestore_error_handler
     def G2(self, path):
