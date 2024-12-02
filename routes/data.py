@@ -203,7 +203,7 @@ def get_excel():
             with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
                 combined_table.to_excel(writer, index=False, sheet_name='Sheet1')
             
-            # Prepare response
+            # Prepare response   
             output.seek(0)
             response = Response(output, mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
             response.headers['Content-Disposition'] = f'attachment; filename={file_name}.xlsx'
