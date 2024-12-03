@@ -196,18 +196,81 @@ def get_excel():
                     combined_table = pd.concat([combined_table, table_data], ignore_index=True)
                 else:
                     return jsonify({"status": "error", "message": "Missing 'table_data' in one of the items"}), 400
+            
+            # Remove blank rows
+            combined_table = combined_table.dropna(how='all')  # Drop rows where all elements are NaN
+            combined_table = combined_table.loc[~(combined_table == '').all(axis=1)]  # Drop rows where all elements are empty strings
+            
+            # Create timestamp in the desired format
             timestamp = datetime.now().strftime("%y-%b-%d %H:%M")
-            file_name = f"{format_id}_{timestamp}"
+            file_name = f"{format_id}_{timestamp}.xlsx"
+            
             # Convert the combined DataFrame to an Excel file in memory
             output = io.BytesIO()
             with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
                 combined_table.to_excel(writer, index=False, sheet_name='Sheet1')
             
-            # Prepare response   
+            # Prepare response
             output.seek(0)
             response = Response(output, mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-            response.headers['Content-Disposition'] = f'attachment; filename={file_name}.xlsx'
+            response.headers['Content-Disposition'] = f'attachment; filename={file_name}'
             return response
+        
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)}), 500
+    else:
+        return jsonify({"status": "error", "message": "Data not found"}), 400
+
+
+@bp.route('/get_cd', methods=['GET', 'POST'])
+def get_csv():
+    from flask import Response
+    import io
+    
+    # Attempt to fetch the format_id from GET or POST data
+    format_id = request.args.get('format_id')
+    
+    if not format_id:
+        # Manually parse JSON if Content-Type is not application/json
+        try:
+            request_data = request.get_json(silent=True)
+            if request_data:
+                format_id = request_data.get('format_id')
+        except Exception:
+            pass  # Fallback to format_id remaining None if parsing fails
+    
+    if not format_id:
+        return jsonify({"status": "error", "message": "Format ID not provided"}), 400
+    
+    # Fetch data
+    data = fs.GC(f"tableData/{format_id}/data")
+    
+    if data:
+        try:
+            combined_table = pd.DataFrame()  # Initialize an empty DataFrame
+            
+            for item in data:
+                if 'table_data' in item:
+                    # Convert the `table_date` to a DataFrame
+                    table_data = pd.DataFrame(item['table_data'])
+                    # Append to the combined table
+                    combined_table = pd.concat([combined_table, table_data], ignore_index=True)
+                else:
+                    return jsonify({"status": "error", "message": "Missing 'table_data' in one of the items"}), 400
+            
+            # Drop empty rows
+            combined_table.dropna(how='all', inplace=True)
+            
+            # Convert the final combined table to CSV
+            csv_buffer = io.StringIO()
+            combined_table.to_csv(csv_buffer, index=False)
+            csv_buffer.seek(0)
+            
+            # Return CSV as plain text
+            return Response(
+                csv_buffer.getvalue(),
+                mimetype="text/plain"
+            )
         
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)}), 500
