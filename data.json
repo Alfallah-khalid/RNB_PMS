@@ -1,0 +1,240 @@
+{
+    "field_groups": [
+        {
+            "fields": [
+                {
+                    "field_label": "Department",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "department",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Division",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "division",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Sub Division",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "sub_division",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Name of Work",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "name_of_work",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Beams Code",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "beams_code",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Sector",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "sector",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Sub Department",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "sub_department",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Directorate",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "directorate",
+                    "field_type": "text"
+                }
+            ],
+            "group_color": "#FFB6C1",
+            "group_name": "basic_information",
+            "group_title": "Basic Information",
+            "group_icon": "work"
+        },
+        {
+            "fields": [
+                {
+                    "field_label": "Head",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "head",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "AA Cost",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "aa_cost",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "AA No And Date",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "aa_no_and_date",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "TS Cost",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "ts_cost",
+                    "field_type": "text"
+                }
+            ],
+            "group_color": "#ADD8E6",
+            "group_name": "accord_details",
+            "group_title": "Accord Details",
+            "group_icon": "account_balance"
+        },
+        {
+            "fields": [
+                {
+                    "field_label": "Cummulative Expenditure till March-24",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "cummulative_expenditure_till_march_24",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Expenditure for 24-25",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "expenditure_for_24_25",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Expenditure for Current Month",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "expenditure_for_current_month",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Total Value of Work Done",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "total_value_of_work_done",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Value of Work Done During The Month",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "value_of_work_done_during_the_month",
+                    "field_type": "text"
+                }
+            ],
+            "group_color": "#FFD700",
+            "group_name": "expenditure_summary",
+            "group_title": "Expenditure Summary",
+            "group_icon": "money"
+        },
+        {
+            "fields": [
+                {
+                    "field_label": "Work Status",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "work_status",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Remarks",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "remarks",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Site Incharge Name",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "site_incharge_name",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Site Incharge Contact No",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "site_incharge_contact_no",
+                    "field_type": "text"
+                },
+                {
+                    "field_label": "Site Incharge Email",
+                    "field_attributes": {
+                        "maxLength": 255,
+                        "required": true
+                    },
+                    "field_name": "site_incharge_email",
+                    "field_type": "text"
+                }
+            ],
+            "group_color": "#90EE90",
+            "group_name": "additional_information",
+            "group_title": "Additional Information",
+            "group_icon": "info"
+        }
+    ],
+    "description": "MPR format based on the provided Excel file",
+    "created_at": "2024-10-24T00:00:00Z",
+    "creator": "User",
+    "format_id": "MPR",
+    "updated_at": "2024-10-24T00:00:00Z",
+    "name": "MPR Format"
+}

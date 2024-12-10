@@ -131,3 +131,47 @@ footer {
 .input-field {
     margin-bottom: 15px;
 }
+
+
+
+
+
+
+/* Sidebar hidden */
+.sidebar.hidden {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+/* Sidebar buttons in one line */
+.sidebar-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+/* Fullscreen mode */
+body.fullscreen-mode #main-header,
+body.fullscreen-mode .sidebar {
+    display: none;
+}
+
+body.fullscreen-mode .content {
+    width: 100%;
+}
+
+/* Restore button */
+#restore-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+}
+
+#restore-button.hidden {
+    display: none;
+}

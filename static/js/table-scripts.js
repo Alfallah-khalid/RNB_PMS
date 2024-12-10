@@ -167,6 +167,7 @@ function handleSubmit() {
     const tableData = hot.getData();
     const columnNames = hot.getSettings().columns.map(col => col.data);
 
+    // Format the table data into JSON
     const formattedData = tableData.map(row => {
         return columnNames.reduce((rowObject, colName, index) => {
             rowObject[colName] = row[index];
@@ -174,7 +175,19 @@ function handleSubmit() {
         }, {});
     });
 
-    sendJsonData(JSON.stringify({ table_data: formattedData }));
+    // Retrieve uid from the URL
+    const uid = getUidFromUrl(); // Function to extract uid from the URL
+
+    // Include uid in the payload
+    sendJsonData(JSON.stringify({ 
+        uid: uid, // Add uid to the payload
+        table_data: formattedData 
+    }));
+}
+
+function getUidFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('uid'); // Extracts the value of the "uid" parameter
 }
 
 // Send JSON data to the backend

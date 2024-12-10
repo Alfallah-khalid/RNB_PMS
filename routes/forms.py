@@ -30,15 +30,14 @@ def render_form(format_id):
 @login_required
 def render_table(format_id):
     # Get the UID from headers if present, else fallback to session email
-    
+    print(format_id)
+    format_id=format_id.upper()
+    print(format_id)
     uid = request.args.get('uid')
-    print(uid)
     user_email = uid if uid else session['profile']['email']
-    print(user_email)
     # Fetch format data from the database
-    format_data = fs.G("formats", document_id=format_id)
+    format_data = fs.G("formats", document_id=str.upper(format_id))
     allowed_users = format_data.get("allowedUsers", None)
-
     # Authorization check
     if allowed_users is not None:
         if user_email not in allowed_users:
@@ -95,19 +94,32 @@ def submitForm():
 @bp.route('/submitTable', methods=['GET', 'POST'])
 @login_required
 def submitTable():
+    fulldata={}
+    
+    fulldata=request.get_json()
+    uid=fulldata['uid']
     try:
         data={}
-
-        data = request.get_json()
+        data['table_data'] = fulldata['table_data']
+        print(data)
         data["metadata"]={}
+        print("x")
         data['metadata']["ipAddress"]=request.remote_addr
         data['metadata']["Useremail"]=session['profile']['email']
+        
         data['metadata']["time"]=datetime.datetime.now()
-        fid=request.referrer.split("/")[-1]
+        fid=request.referrer.split("/")[-1].split("?")[0].upper()
         data['metadata']['formatID']=fid
-        print(data)
-        print(f"formatsData/{fid}")
-        fs.CU(path=f"tableData/{fid}/data",document_id=session['profile']['email'], data=data)
+
+        if request.method == 'POST':
+            uid = uid  # For POST request data
+        else:
+            uid = uid  # For GET request data
+        user_email = uid if uid else session['profile']['email']
+        print(fid)
+        print (data)
+        
+        fs.CU(path=f"tableData/{fid}/data",document_id=user_email, data=data)
     except:
         print("hello")
     # Render the form with the field_groups

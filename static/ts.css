@@ -80,7 +80,21 @@
     box-sizing: border-box; /* Ensure borders are included in cell width */
 }
 
+form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#dynamic-buttons {
+    flex: 0 0 auto;
+}
+
 #spreadsheet {
-    flex: 1; /* Take up all available space */
-    overflow: auto; /* Add scrolling if content overflows */
+    flex: 1 1 auto;
+    overflow: auto;
+}
+
+#action_buttons {
+    flex: 0 0 auto;
 }

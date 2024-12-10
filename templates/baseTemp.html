@@ -13,11 +13,10 @@
 
     {% endblock %}
 </head>
-<meta http-equiv="Content-Security-Policy" content="style-src 'self' 'sha256-BKeCINbFKNor9SzO2zcEW0COcUSsI27Xd1P7KOsD2Is='">
 
 <body>
 
-    <header>
+    <header id="main-header">
         <div class="header-left">
             <img src="/static/logo.png" alt="Logo" width="80" height="80">
         </div>
@@ -30,7 +29,7 @@
                 class="btn-small waves-effect waves-light red button">Logout</a>
             {% else %}<a href="{{ url_for('auth.login') }}" class="btn-small waves-effect waves-light teal button ">Login with
                 Google</a>
-            {% endif %}</button>
+            {% endif %}
             <div class="welcome-message">
                 {% if user %}
                 Welcome, {{ user['email'] }}
@@ -39,13 +38,19 @@
                 {% endif %}
             </div>
         </div>
-        </div>
     </header>
 
     <main>
         <aside class="sidebar">
+            <div class="sidebar-buttons">
+                <button id="toggle-sidebar" class="btn-floating btn-small waves-effect">
+                    <i class="material-icons">menu</i>
+                </button>
+                <button id="fullscreen-toggle" class="btn-floating btn-small waves-effect">
+                    <i class="material-icons">fullscreen</i>
+                </button>
+            </div>
             <a href="/tables/mpr"><i class="fas fa-home"></i> MPR</a>
-
         </aside>
 
         <section class="content">
@@ -56,10 +61,17 @@
         </section>
     </main>
 
+    <!-- Fullscreen Restore Button -->
+    <button id="restore-button" class="btn-floating btn-small waves-effect red hidden">
+        <i class="material-icons">close_fullscreen</i>
+    </button>
+
     <footer>
         &copy; 2024 R&B Central Kashmir. All rights reserved.
     </footer>
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='js/baseJS.js') }}"></script>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </html>
