@@ -104,6 +104,10 @@ function initializeHandsontable(reportData, tableData) {
         rowHeaders: true,
         autoColumnSize: false,
         height: 450,
+        filters: true,
+        contextMenu: true,
+        dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'], // Enable filtering
+        columnSorting: true,
         nestedHeaders: tableSettings.nestedHeaders,
         columns: tableSettings.columns,
         hiddenColumns: {
